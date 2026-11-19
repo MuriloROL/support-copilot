@@ -1,11 +1,11 @@
 import { answerTicket } from '@/lib/copilot.ts';
-import { allowRequest } from '@/lib/rate-limit.ts';
+import { allowRequest, RATE_LIMIT_MESSAGE } from '@/lib/rate-limit.ts';
 
 const MAX_TICKET_LENGTH = 2000;
 
 export async function POST(request: Request) {
-  if (!allowRequest(request, 'answer', 8)) {
-    return Response.json({ error: 'Muitas requisições. Tente de novo em um minuto.' }, { status: 429 });
+  if (!allowRequest(request, 'answer')) {
+    return Response.json({ error: RATE_LIMIT_MESSAGE }, { status: 429 });
   }
 
   let body: unknown;

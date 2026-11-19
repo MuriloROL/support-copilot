@@ -67,6 +67,6 @@ Next.js 16 (App Router, Route Handlers), TypeScript, Tailwind CSS 4, OpenRouter 
 ## Known limits
 
 - Keyword search with prefix stemming fits a small help center. Past a few hundred articles, move to embeddings (pgvector).
-- Rate limiting is in memory per serverless instance. Use Vercel KV or Upstash for real traffic.
+- The public demo allows one call per endpoint every 10 minutes per IP. The limiter is in memory per serverless instance; use Vercel KV or Upstash for real traffic.
 - The Mercado Livre connector reads `ML_ACCESS_TOKEN` from the environment and does not rotate it. Access tokens last 6 hours and refresh tokens are single use, so running unattended needs a persisted token store.
 - The processed store is a JSON file for a single worker. Use Postgres when running several workers.
